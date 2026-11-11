@@ -11,7 +11,7 @@ Glavna posebnost je **profil ukusa**. Osoba složi listu „definira me” po do
 - Istraživanje je gotovo. Pogledaj `reports/` (tri izvještaja) i `research_notes/` (bilješke s izvorima).
 - Odobreni plan je u `PLAN.md`: pilot s 30–50 stvarnih ljudi koji uspoređuje više metoda sličnosti s ocjenama sudionika.
 - **Opseg je sužen na glazbu i filmove.** Ostale domene dodajemo tek ako pilot pokaže da pristup radi.
-- Sljedeći korak: **Faza 1, specifikacija kataloga** za glazbu i film. Prvo dokument koji pregledavamo zajedno, ne kod.
+- U tijeku: **Faza 1, specifikacija kataloga** za glazbu i film. Nacrt je u `docs/Faza 1 – katalog za glazbu i film.md` i čeka odgovore na otvorena pitanja. Prvo dokument koji pregledavamo zajedno, ne kod.
 
 ## Način rada (važno)
 - Komuniciraj na **hrvatskom**.
