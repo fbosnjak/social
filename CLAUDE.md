@@ -10,7 +10,8 @@ Glavna posebnost je **profil ukusa**. Osoba složi listu „definira me” po do
 ## Trenutno stanje
 - Istraživanje je gotovo. Pogledaj `reports/` (tri izvještaja) i `research_notes/` (bilješke s izvorima).
 - Odobreni plan je u `PLAN.md`: pilot s 30–50 stvarnih ljudi koji uspoređuje više metoda sličnosti s ocjenama sudionika.
-- Sljedeći korak: **Faza 1, specifikacija kataloga i rječnika** po domeni. Prvo dokument koji pregledavamo zajedno, ne kod.
+- **Opseg je sužen na glazbu i filmove.** Ostale domene dodajemo tek ako pilot pokaže da pristup radi.
+- Sljedeći korak: **Faza 1, specifikacija kataloga** za glazbu i film. Prvo dokument koji pregledavamo zajedno, ne kod.
 
 ## Način rada (važno)
 - Komuniciraj na **hrvatskom**.
@@ -20,9 +21,9 @@ Glavna posebnost je **profil ukusa**. Osoba složi listu „definira me” po do
 
 ## Donesene odluke
 - **Podaci:** jedna lista „definira me” po domeni. Ne čita se povijest ni ostatak korisničkog računa. U aplikaciji nema upitnika.
-- **Domene:** glazba, filmovi, serije, knjige, podcasti, video i društvene igre, hobiji, sport, hrana, umjetnost.
+- **Domene:** za početak samo glazba i filmovi. Kasnije, ako pilot uspije: serije, knjige, podcasti, video i društvene igre, hobiji, sport, hrana, umjetnost.
 - **Izvor stavki:** liste se slažu u aplikaciji pretragom kataloga. Službeni API-ji koriste se samo gdje još rade (npr. YouTube; Spotify od 2026. ne daje sadržaj tuđih playlista).
-- **Katalozi:** trajno samo otvoreni izvori (Wikidata, MusicBrainz CC0 jezgra, Discogs izvozi, TVmaze, Open Library izvozi, Podcast Index). Bez TMDB-a, BGG-a, IMDb-a i Last.fm-a za komercijalnu upotrebu.
+- **Katalozi:** trajno samo otvoreni izvori. Glazba: MusicBrainz CC0 jezgra, Discogs izvozi, Wikidata. Film: Wikidata. Za kasnije domene: TVmaze, Open Library izvozi, Podcast Index. Bez TMDB-a, BGG-a, IMDb-a i Last.fm-a za komercijalnu upotrebu.
 - **Hrvatske stavke s oskudnim metapodacima:** dobivaju generirane opise i žanrove, označene kao „generirano”.
 - **Osi ukusa:** psihološke osi (Estetsko, Mračno, Zajedničarsko, Uzbudljivo, Cerebralno + energija, raspoloženje, dubina) i osi „kako konzumiraš” (nišnost, staro/novo, širina). Pilot ih provjerava.
 - **Sličnost:** računa se unutar i preko domena. Domene se spajaju ponderirano po pouzdanosti. Pilot uspoređuje više metoda: prosječni vektor, uparivanje stavki ili optimalni transport, udaljenost na osima, preklapanje s IDF-om te njihove kombinacije.
