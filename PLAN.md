@@ -25,7 +25,8 @@ Izvori:
 | Podaci | Jedna lista „definira me” po domeni. Bez povijesti, bez ostatka računa, bez upitnika u aplikaciji. |
 | Domene | Za početak samo glazba i filmovi. Serije, knjige, podcasti, video i društvene igre, hobiji, sport, hrana i umjetnost dolaze kasnije, ako pilot uspije. |
 | Izvor stavki | Liste se slažu u alatu pretragom kataloga. Službeni API-ji samo gdje još rade. |
-| Katalozi | Trajno samo otvoreni izvori. Glazba: MusicBrainz (CC0 jezgra), Discogs izvozi, Wikidata. Film: Wikidata. Bez TMDB-a, IMDb-a i Last.fm-a za komercijalnu upotrebu. Ostali katalozi (TVmaze, Open Library, Podcast Index) uz kasnije domene. |
+| Komercijalnost | Mreža je nekomercijalna, pa smijemo koristiti i izvore s nekomercijalnom licencom. Ako mreža jednom postane komercijalna, licence se tada rješavaju iznova. |
+| Katalozi | Wikidata kao čvorište. Glazba: MusicBrainz (uključujući žanrove), Discogs izvozi, Last.fm oznake. Film: Wikidata i TMDB (na odgovornost korisnika, unatoč klauzuli o strojnom učenju). Ostali katalozi (TVmaze, Open Library, Podcast Index) uz kasnije domene. |
 | Praznine u metapodacima | Generirani opisi i žanrovi, označeni kao „generirano” |
 | Osi | Psihološke osi (Estetsko, Mračno, Zajedničarsko, Uzbudljivo, Cerebralno + energija, raspoloženje, dubina) + „kako konzumiraš” (nišnost, staro/novo, širina). Pilot ih provjerava. |
 | Sličnost | Unutar domena i preko domena. Domene se spajaju ponderirano po pouzdanosti (duljina i opisanost lista). |

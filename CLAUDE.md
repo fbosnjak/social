@@ -23,7 +23,8 @@ Glavna posebnost je **profil ukusa**. Osoba složi listu „definira me” po do
 - **Podaci:** jedna lista „definira me” po domeni. Ne čita se povijest ni ostatak korisničkog računa. U aplikaciji nema upitnika.
 - **Domene:** za početak samo glazba i filmovi. Kasnije, ako pilot uspije: serije, knjige, podcasti, video i društvene igre, hobiji, sport, hrana, umjetnost.
 - **Izvor stavki:** liste se slažu u aplikaciji pretragom kataloga. Službeni API-ji koriste se samo gdje još rade (npr. YouTube; Spotify od 2026. ne daje sadržaj tuđih playlista).
-- **Katalozi:** trajno samo otvoreni izvori. Glazba: MusicBrainz CC0 jezgra, Discogs izvozi, Wikidata. Film: Wikidata. Za kasnije domene: TVmaze, Open Library izvozi, Podcast Index. Bez TMDB-a, BGG-a, IMDb-a i Last.fm-a za komercijalnu upotrebu.
+- **Mreža je nekomercijalna.** Zato smijemo koristiti i izvore s nekomercijalnom licencom. Ako mreža jednom bude komercijalna, licence se tada rješavaju iznova.
+- **Katalozi:** Wikidata je čvorište identiteta. Glazba: MusicBrainz (i žanrovi, CC BY-NC-SA), Discogs izvozi, Last.fm oznake. Film: Wikidata i TMDB. TMDB koristimo unatoč klauzuli o strojnom učenju, na odgovornost korisnika. Za kasnije domene: TVmaze, Open Library izvozi, Podcast Index. IMDb i BGG se zasad ne koriste.
 - **Hrvatske stavke s oskudnim metapodacima:** dobivaju generirane opise i žanrove, označene kao „generirano”.
 - **Osi ukusa:** psihološke osi (Estetsko, Mračno, Zajedničarsko, Uzbudljivo, Cerebralno + energija, raspoloženje, dubina) i osi „kako konzumiraš” (nišnost, staro/novo, širina). Pilot ih provjerava.
 - **Sličnost:** računa se unutar i preko domena. Domene se spajaju ponderirano po pouzdanosti. Pilot uspoređuje više metoda: prosječni vektor, uparivanje stavki ili optimalni transport, udaljenost na osima, preklapanje s IDF-om te njihove kombinacije.

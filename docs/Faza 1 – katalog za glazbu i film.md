@@ -22,14 +22,29 @@ Prije pisanja provjerio sam tri stvari koje su u istraživanju ostale otvorene. 
 2. **Discogs pokriva hrvatsku glazbu puno bolje od očekivanog.** Svih 18 hrvatskih i regionalnih izvođača s Discogs ID-jem ima žanrove i stilove, uključujući hip-hop i elektroniku, gdje MusicBrainz nema ništa. Stilovi pripadaju izdanjima, pa nose šum iz kompilacija i suradnji.
 3. **Hrvatski film na Wikidati ima identitet, ali ne i opis.** Za 394 filma IMDb ID ima 92%, a redatelja 84%. Žanr je najčešće samo jedan, i to „drama”. Opis na hrvatskom ima 12% filmova, a članak na hrvatskoj Wikipediji 52%.
 
-Posljedica: **za glazbu je Discogs glavni izvor žanrova, a ne MusicBrainz. Za film je glavni izvor opisa tekst s Wikipedije i generirani opis, jer otvoreni žanrovi nisu dovoljni.**
+Posljedica: **za glazbu je Discogs glavni izvor pokrivenosti žanrova. Za film otvoreni izvori nisu dovoljni za opis.**
+
+## Odluke iz prvog kruga
+
+| Tema | Odluka |
+|---|---|
+| Komercijalnost | Mreža je nekomercijalna. Izvori s nekomercijalnom licencom su dopušteni. Ako mreža jednom postane komercijalna, licence se tada rješavaju iznova. |
+| MusicBrainz žanrovi | Koriste se (CC BY-NC-SA), uz navod izvora |
+| Last.fm | Koristi se za oznake izvođača. Pokrivenost hrvatskih izvođača treba izmjeriti (potreban API ključ). |
+| TMDB | Koristi se za film, na odgovornost korisnika, unatoč klauzuli koja zabranjuje korištenje za treniranje i validaciju sustava strojnog učenja |
+| IMDb, Spotify | Zasad se ne koriste kao izvor podataka, samo kao poveznice |
+
+Uvjeti koje treba poštovati:
+- **Navod izvora** za MusicBrainz, Last.fm i TMDB. TMDB traži svoj logo i rečenicu da proizvod koristi TMDB API, ali ga TMDB ne podržava.
+- **ShareAlike za MusicBrainz:** izvedeni podaci o žanrovima moraju biti dostupni pod istom licencom. To se odnosi na podatke o stavkama, ne na profile korisnika.
+- **Rok čuvanja podataka.** TMDB ograničava keširanje, a prethodni izvještaj navodi najviše šest mjeseci. Podatke treba povremeno osvježavati, pa se TMDB u zapisu stavke drži odvojeno od ostalih izvora **[točan uvjet za nekomercijalnu uporabu treba ponovno pročitati]**. Za Last.fm uvjete čuvanja tek treba provjeriti.
 
 ## Načela koja vrijede za obje domene
 
 Ova načela proizlaze iz već donesenih odluka i izvještaja „Katalozi i rječnik ukusa”.
 
 - **Kanonski identitet stavke** je Wikidata QID. Ako ga nema, stavka dobiva vlastiti ID, uz MBID ili Discogs ID kao poveznicu. ID vlasničkog servisa (Spotify, IMDb, TMDB) nikad nije kanonski. Smije se spremiti samo kao poveznica.
-- **Trajno se koriste samo otvoreni izvori:** Wikidata (CC0), MusicBrainz jezgra (CC0) i Discogs dumpovi (CC0). Tekst Wikipedije (CC BY-SA) koristi se uz uvjet koji je otvoreno pitanje 6.
+- **Izvori:** Wikidata, MusicBrainz, Discogs dumpovi, Last.fm i TMDB, prema odlukama iz prvog kruga. Tekst Wikipedije (CC BY-SA) koristi se uz uvjet koji je otvoreno pitanje 6.
 - **Svaki podatak nosi izvor.** Uz svaki žanr, opis i bod na osi bilježi se odakle dolazi: Discogs, Wikidata, Wikipedija, generirano ili uredničko.
 - **Generirani sadržaj je uvijek označen** kao „generirano” i odvojen od kataloških podataka. Tako ga možemo uključiti ili isključiti pri usporedbi metoda (plan, Faza 4).
 - **Čuvaju se svi nazivi:** hrvatski, izvorni, engleski i aliasi. Katalozi kao prikazni naziv često vraćaju engleski.
@@ -53,9 +68,10 @@ Ova načela proizlaze iz već donesenih odluka i izvještaja „Katalozi i rječ
 |---|---|---|---|
 | Identitet, nazivi, aliasi | Wikidata, MusicBrainz | CC0 | MusicBrainz ima više aliasa i pravopisnih varijanti |
 | Vrsta (osoba ili sastav), država, godine aktivnosti | MusicBrainz, Wikidata | CC0 | Kod 2 od 22 izvođača iz uzorka država nije upisana na MusicBrainzu |
-| Žanrovi i stilovi | **Discogs dumpovi** (stilovi izdanja) | CC0 | Glavni izvor. Agregiraju se na razinu izvođača (vidi dolje). |
+| Žanrovi i stilovi | **Discogs dumpovi** (stilovi izdanja) | CC0 | Najbolja pokrivenost hrvatskih izvođača (18 od 18). Agregiraju se na razinu izvođača (vidi dolje). |
+| Žanrovi i oznake | **MusicBrainz** | CC BY-NC-SA | Vezani uz izvođača i manje šumni, ali ih ima samo 7 od 22 hrvatskih izvođača |
+| Oznake | **Last.fm** (top tags izvođača) | nekomercijalno uz navod | Bogate i opisne („melancholic”, „croatian”). Pokrivenost hrvatskih izvođača nije izmjerena. |
 | Žanr | Wikidata (P136) | CC0 | Dopuna. Obično samo jedan, grub. |
-| Žanrovi i oznake | MusicBrainz | **CC BY-NC-SA** | Samo ako odlučimo da pilot smije koristiti nekomercijalne podatke (otvoreno pitanje 3) |
 | Diskografija s godinama | MusicBrainz (release group), Discogs (master) | CC0 | Za os „staro/novo” i za ponderiranje stilova |
 | Opis | hr ili en Wikipedija, ili generirano | CC BY-SA ili vlastito | Hrvatski opis na Wikidati ima 12 od 20 izvođača |
 | Popularnost | Broj Wikipedija (sitelinks) na Wikidati; Discogs kolekcije | CC0; za Discogs neprovjereno | Za os nišnosti i IDF težine |
@@ -70,6 +86,22 @@ Discogs stilovi pripadaju izdanjima. Unija stilova s tri izdanja dala je Haustor
 4. dodatno ponderirati izdanjima koja ljudi više imaju, ako se podatak o kolekcijama smije koristiti
 
 Prag i težine provjeravaju se ručno na uzorku izvođača (vidi „Provjera”).
+
+### Kako se spajaju izvori žanrova
+
+Četiri izvora imaju različite prednosti:
+- MusicBrainz je točan, ali rijedak.
+- Discogs pokriva gotovo sve, ali nosi šum iz izdanja.
+- Last.fm ima bogate i opisne oznake, ali one miješaju žanr, raspoloženje i nebitne oznake („seen live”).
+- Wikidata daje jedan grubi žanr.
+
+Prijedlog spajanja:
+1. Svaki izvor preslika se na zajednički rječnik žanrova (vidi dolje). Last.fm oznake koje nisu žanr (raspoloženje, epoha, jezik) idu u obilježja ili se odbacuju.
+2. Žanr koji potvrđuje više izvora dobiva veću težinu.
+3. Ako se izvori izrazito ne slažu (Krankšvester je na MusicBrainzu „gabber”, a na Wikidati hip-hop), stavka ide na ručnu provjeru.
+4. Bilježi se koliko izvora stoji iza svakog žanra. To je ulaz za ponder pouzdanosti u Fazi 4.
+
+Varijanta za Fazu 4: pilot može usporediti profile iz svih izvora s profilima samo iz otvorenih (CC0) izvora. Tako saznajemo koliko točnosti donose nekomercijalni izvori, što je važno ako mreža jednom postane komercijalna.
 
 ### Rječnik žanrova
 
@@ -99,19 +131,22 @@ Za sličnost trebamo jedan zajednički rječnik u koji se preslikavaju svi izvor
 | Identitet, naslovi (hr, izvorni, en), aliasi | Wikidata | CC0 | Hrvatski naslov ima 61% hrvatskih filmova |
 | Godina, trajanje, država, izvorni jezik | Wikidata (P577, P2047, P495, P364) | CC0 | |
 | Redatelj, scenarist, glavni glumci, skladatelj | Wikidata (P57, P58, P161, P86) | CC0 | Redatelja ima 84% hrvatskih filmova. Ljudi su ujedno signal sličnosti. |
-| Žanr | Wikidata (P136) | CC0 | Pregrub: kod hrvatskih filmova najčešće samo „drama” |
+| Žanr | Wikidata (P136), TMDB | CC0; TMDB uvjeti | Wikidata je pregruba (kod hrvatskih filmova najčešće samo „drama”). TMDB ima oko 19 žanrova i dodjeljuje ih više po filmu. |
+| Ključne riječi | **TMDB** (keywords) | TMDB uvjeti | Teme i motivi („dysfunctional family”, „island”). Mogu biti osnova sloja obilježja. Pokrivenost hrvatskih filmova nije izmjerena. |
+| Sažetak radnje | **TMDB** (overview, i na hrvatskom gdje postoji) | TMDB uvjeti | Dopuna Wikipediji, posebno kad članka nema. Hrvatski sažeci nisu izmjereni. |
+| Alternativni naslovi | TMDB, Wikidata | – | Za pretragu |
 | Glavna tema, radnja smještena u | Wikidata (P921, P840) | CC0 | Kod stranih filmova češće, kod hrvatskih rijetko **[nije izmjereno]** |
 | Opis i radnja | hr ili en Wikipedija | CC BY-SA | Glavni izvor teksta. Hrvatski članak ima 52% hrvatskih filmova. |
 | Generirani opis, žanrovi i bodovi na osima | generirano iz gornjeg teksta | vlastito | Za sve stavke, ali označeno |
-| Popularnost | Broj Wikipedija (sitelinks) | CC0 | Za hrvatske filmove 6–19, za poznate strane 80+ |
-| Poveznice | IMDb (P345), TMDB (P4947) | samo ID | Za prikaz i povezivanje. Podaci se ne preuzimaju. |
+| Popularnost | Broj Wikipedija (sitelinks); TMDB popularnost i broj glasova | CC0; TMDB uvjeti | Za hrvatske filmove 6–19 Wikipedija, za poznate strane 80+ |
+| Poveznice | TMDB ID (P4947) za dohvat; IMDb (P345) samo kao poveznica | – | TMDB ID ima većina hrvatskih filmova na Wikidati |
 | Plakat | – | – | Otvoreno pitanje 8 |
 
 ### Rječnik žanrova i obilježja
 
 Wikidatini žanrovi ne razlikuju dovoljno. „Drama” opisuje i Zvizdan i Fine mrtve djevojke. Zato predlažem dva sloja:
 1. **Žanrovi:** mali kontrolirani popis od oko 25–30 žanrova (drama, komedija, triler, horor, dokumentarni, animirani…), na koji se preslikavaju Wikidatini žanrovi.
-2. **Obilježja:** opisni pojmovi koji razlikuju ukus unutar žanra, na primjer „spori ritam”, „društvena kritika”, „crni humor”, „poslijeratna tema”, „autorski”, „žanrovski”, „vizualno stiliziran”. Dobivaju se generiranjem iz teksta i pregledavaju na uzorku.
+2. **Obilježja:** opisni pojmovi koji razlikuju ukus unutar žanra, na primjer „spori ritam”, „društvena kritika”, „crni humor”, „poslijeratna tema”, „autorski”, „žanrovski”, „vizualno stiliziran”. Izvori su TMDB ključne riječi, preslikane na kontrolirani popis, i generiranje iz teksta. Pregledavaju se na uzorku.
 
 Obilježja su ujedno most prema psihološkim osima (Mračno, Cerebralno, Estetsko…). Studija Chamorro-Premuzica (2010) pokazala je da laičke, perceptivne kategorije bolje prate osobnost od stručnih. To podupire ovaj sloj.
 
@@ -129,8 +164,10 @@ Wikidata je čvorište. Jedna stavka sastavlja se ovako:
 Wikidata QID
  ├─ MusicBrainz MBID (P434) → aliasi, vrsta, država, diskografija
  ├─ Discogs ID (P1953 izvođač, P1954 master) → žanrovi i stilovi izdanja
+ ├─ Last.fm (preko naziva ili MBID-a) → oznake izvođača
+ ├─ TMDB ID (P4947) → žanrovi, ključne riječi, sažetak, alternativni naslovi
  ├─ hr/en Wikipedija (sitelinks) → tekst opisa, broj Wikipedija kao popularnost
- └─ IMDb, TMDB, Spotify, Deezer ID → samo poveznice
+ └─ IMDb, Spotify, Deezer ID → samo poveznice
 ```
 
 Stavka bez Wikidata QID-a (novi izvođač, mali film) povezuje se preko MBID-a ili Discogs ID-a i dobiva vlastiti ID. Prema prvom mjerenju, MusicBrainz ima vezu na Wikidatu kod 16 od 22, a Wikidata ima Discogs ID kod 19 od 20 hrvatskih izvođača.
@@ -211,7 +248,7 @@ Pragovi su moj prijedlog i otvoreni su za raspravu.
 
 1. **Vrste stavki u glazbi:** samo izvođači; izvođači uz neobavezne albume; ili i pjesme? Prijedlog: izvođači, uz neobavezne albume.
 2. **Vrste stavki u filmu:** samo filmovi ili i redatelji? Ulaze li kratki filmovi i dokumentarci? Prijedlog: samo filmovi, uključujući dokumentarne i animirane, bez kratkih.
-3. **MusicBrainz žanrovi u pilotu:** pilot je nekomercijalno istraživanje. Smijemo li u pilotu usporediti rezultate s MusicBrainz žanrovima i bez njih? Ili se odmah držimo samo trajno dopuštenih izvora, da rezultati pilota vrijede i za proizvod? Prijedlog: samo trajno dopušteni izvori.
+3. ~~MusicBrainz žanrovi u pilotu~~ **Odlučeno:** koriste se, zajedno s Last.fm-om i TMDB-om (vidi „Odluke iz prvog kruga”).
 4. **Ručni unos:** smije li sudionik upisati stavku koje nema u katalogu? Prijedlog: smije. Takve stavke ručno povezujemo ili opisujemo prije analize.
 5. **Prednost domaćim stavkama u pretrazi:** treba li hrvatskim i regionalnim stavkama dati blagu prednost u rangiranju?
 6. **Tekst Wikipedije:** smijemo li ga koristiti kao ulaz za generirane opise i vektore (CC BY-SA)? Ili samo za pilot, uz pravnu provjeru prije proizvoda?
@@ -226,4 +263,4 @@ Pragovi su moj prijedlog i otvoreni su za raspravu.
 Kad odgovoriš na pitanja, dopunit ću dokument odlukama. Zatim slijede:
 - rječnik žanrova i obilježja (prvi prijedlog za pregled)
 - popis uzorka za provjeru
-- mjerenja koja su ostala otvorena (podtipovi filmova, strani film za usporedbu, novi i digitalni izvođači na Discogsu)
+- mjerenja koja su ostala otvorena: podtipovi filmova, strani film za usporedbu, novi i digitalni izvođači na Discogsu, **Last.fm oznake i TMDB ključne riječi i hrvatski sažeci za hrvatske stavke** (oba trebaju API ključ)
