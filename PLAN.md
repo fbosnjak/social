@@ -24,6 +24,7 @@ Izvori:
 |---|---|
 | Podaci | Jedna lista „definira me” po domeni. Bez povijesti, bez ostatka računa, bez upitnika u aplikaciji. |
 | Domene | Za početak samo glazba i filmovi. Serije, knjige, podcasti, video i društvene igre, hobiji, sport, hrana i umjetnost dolaze kasnije, ako pilot uspije. |
+| Stavke | Glazba: pjesme (lista treba moći postati playlista). Film: filmovi. |
 | Izvor stavki | Liste se slažu u alatu pretragom kataloga. Službeni API-ji samo gdje još rade. |
 | Komercijalnost | Mreža je nekomercijalna, pa smijemo koristiti i izvore s nekomercijalnom licencom. Ako mreža jednom postane komercijalna, licence se tada rješavaju iznova. |
 | Katalozi | Wikidata kao čvorište. Glazba: MusicBrainz (uključujući žanrove), Discogs izvozi, Last.fm oznake. Film: Wikidata i TMDB (na odgovornost korisnika, unatoč klauzuli o strojnom učenju). Ostali katalozi (TVmaze, Open Library, Podcast Index) uz kasnije domene. |

@@ -21,6 +21,7 @@ Glavna posebnost je **profil ukusa**. Osoba složi listu „definira me” po do
 
 ## Donesene odluke
 - **Podaci:** jedna lista „definira me” po domeni. Ne čita se povijest ni ostatak korisničkog računa. U aplikaciji nema upitnika.
+- **Stavke:** u glazbi se biraju **pjesme** (lista treba moći postati playlista), u filmu **filmovi** (redatelji, glumci i ostalo su metapodaci filma). Ručni unos stavke koje nema u katalogu zasad je dopušten. Hrvatske stavke nemaju prednost u pretrazi. Lokalni žanrovi se ne dodaju u rječnik.
 - **Domene:** za početak samo glazba i filmovi. Kasnije, ako pilot uspije: serije, knjige, podcasti, video i društvene igre, hobiji, sport, hrana, umjetnost.
 - **Izvor stavki:** liste se slažu u aplikaciji pretragom kataloga. Službeni API-ji koriste se samo gdje još rade (npr. YouTube; Spotify od 2026. ne daje sadržaj tuđih playlista).
 - **Mreža je nekomercijalna.** Zato smijemo koristiti i izvore s nekomercijalnom licencom. Ako mreža jednom bude komercijalna, licence se tada rješavaju iznova.

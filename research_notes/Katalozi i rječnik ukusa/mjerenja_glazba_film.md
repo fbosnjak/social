@@ -86,6 +86,29 @@ Najčešći žanrovi hrvatskih filmova: drama (159), dokumentarni (60), komedija
 - Jugoslavenski filmovi većinom su označeni državom Jugoslavija (Q36704), a ne SFRJ. Pretraga i pravilo „hrvatsko ili regionalno” moraju obuhvatiti obje oznake (zaključak).
 - Broj od 394 hrvatska filma je donja granica, jer upit nije obuhvatio podtipove. HAVC-ov katalog od 2008. i Hrvatska kinoteka mogu pokazati koliko nedostaje (neizmjereno).
 
+## 4. Pjesme na MusicBrainzu
+
+Provjera nakon odluke da se u glazbi biraju pjesme. Pretraga snimki (`recording:"…" AND artist:"…"`) i dohvat prvog pogotka s `inc=genres+tags+isrcs` ([MusicBrainz API](https://musicbrainz.org/doc/MusicBrainz_API)).
+
+| Pjesma | Pogodaka (snimki) | Žanrovi snimke | Oznake | ISRC |
+|---|---|---|---|---|
+| Baby Lasagna – Rim Tim Tagi Dim | 6 | – | 0 | 1 |
+| Prljavo kazalište – Mojoj majci | 13 | – | 0 | 0 |
+| Oliver Dragojević – Cesarica | 15 | – | 0 | 1 |
+| Radiohead – Creep | 194 | – | 0 | 0 |
+| Arctic Monkeys – Do I Wanna Know? | 24 | – | 0 | 0 |
+| Billie Eilish – bad guy | 37 | – | 0 | 1 |
+
+Pet upita nije vratilo ništa: Ništa kontra Splita, Ena (Let 3), Ljubav ili mržnja (Elemental), Moja mala djevojčica (Detour) i Šuti moj dječače plavi (Gibonni). **To nije mjera pokrivenosti.** Naslove sam složio iz sjećanja i neki možda nisu točni ili pripadaju drugom izvođaču. Upit s točnim navodnicima osim toga promašuje pravopisne varijante.
+
+**Nalazi:**
+- Snimke nemaju žanrove ni oznake, ni kontrolne pjesme. Žanrovi na MusicBrainzu žive na izvođaču i albumu (release group). Pjesma ih mora naslijediti.
+- Jedna pjesma ima mnogo snimki (Creep 194). Treba pravilo za kanonsku pjesmu, na primjer djelo (work) uz izvođača ili grupiranje po naslovu, izvođaču i ISRC-u.
+
+**Zvučna obilježja:**
+- Spotify je audio features zatvorio za nove aplikacije 27. 11. 2024. ([Spotify](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api)).
+- AcousticBrainz nudi dumpove obilježja za oko 29,5 milijuna prijava. Zadnja obavijest na stranici je iz srpnja 2022. ([AcousticBrainz download](https://acousticbrainz.org/download)). Jesu li dumpovi još dostupni i koliko pokrivaju hrvatske pjesme, nije provjereno.
+
 ## Što i dalje nije izmjereno
 - Pokrivenost hrvatskih filmova kad se uključe podtipovi (dokumentarni, kratki, TV film).
 - Usporedni brojevi za strani film (upit za Francusku je istekao).

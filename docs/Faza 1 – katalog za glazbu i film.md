@@ -39,6 +39,16 @@ Uvjeti koje treba poštovati:
 - **ShareAlike za MusicBrainz:** izvedeni podaci o žanrovima moraju biti dostupni pod istom licencom. To se odnosi na podatke o stavkama, ne na profile korisnika.
 - **Rok čuvanja podataka.** TMDB ograničava keširanje, a prethodni izvještaj navodi najviše šest mjeseci. Podatke treba povremeno osvježavati, pa se TMDB u zapisu stavke drži odvojeno od ostalih izvora **[točan uvjet za nekomercijalnu uporabu treba ponovno pročitati]**. Za Last.fm uvjete čuvanja tek treba provjeriti.
 
+## Odluke iz drugog kruga
+
+| Tema | Odluka |
+|---|---|
+| Stavke u glazbi | **Pjesme.** Lista glazbe treba moći postati playlista. |
+| Stavke u filmu | **Filmovi.** Redatelji, glumci i ostalo izvlače se iz filma kao metapodaci, a ne biraju se zasebno. |
+| Ručni unos | Zasad dopušten. Takve stavke se ručno povezuju ili opisuju prije analize. |
+| Prednost domaćim stavkama u pretrazi | Ne |
+| Lokalni žanrovi | Ne dodaju se. Rječnik žanrova gradi se samo iz izvora. |
+
 ## Načela koja vrijede za obje domene
 
 Ova načela proizlaze iz već donesenih odluka i izvještaja „Katalozi i rječnik ukusa”.
@@ -60,13 +70,47 @@ Ova načela proizlaze iz već donesenih odluka i izvještaja „Katalozi i rječ
 | **Pjesma** | Najbliže onome što ljudi slušaju. | Najmanje preklapanja. Najslabiji otvoreni metapodaci. Jedna pjesma malo govori o ukusu. |
 | **Žanr ili scena** | Hvata ukus kad osoba ne može nabrojiti izvođače („tamburica”, „techno”). | Slab razlikovni signal. Uvodi rječnik žanrova u sučelje. |
 
-**Prijedlog:** lista se sastoji od **izvođača**, a albumi su neobavezni. Žanr kao stavka ne ulazi u pilot. To je otvoreno pitanje 1.
+**Odluka:** lista se sastoji od **pjesama**, jer lista treba moći postati playlista. Izvođači i albumi ne biraju se zasebno, ali svaka pjesma nosi podatke o svom izvođaču i albumu.
+
+### Posljedice odabira pjesama
+
+Pjesma je razina na kojoj su otvoreni metapodaci najslabiji. Provjera na uzorku od 11 poznatih pjesama (`research_notes/…/mjerenja_glazba_film.md`, odjeljak 4) pokazala je:
+- **Snimke na MusicBrainzu nemaju žanrove ni oznake**, čak ni Creep, bad guy ili Do I Wanna Know?. Žanrovi na MusicBrainzu žive na razini izvođača i albuma.
+- **Ista pjesma postoji u mnogo snimki.** „Creep” ima 194 pogotka (studijska, uživo, remaster, obrade), a „Cesarica” 15. Za preklapanje među ljudima treba odrediti što je „ista pjesma”.
+- Discogs stilovi vezani su uz izdanje, pa pjesma može naslijediti stilove albuma ili singla na kojem je izašla.
+
+Iz toga slijede tri pravila:
+1. **Profil pjesme je slojevit.** Pjesma nasljeđuje opis albuma i izvođača, a vlastiti opis dobiva samo gdje on postoji (vidi „Kako se opisuje pjesma”).
+2. **Kanonska pjesma** je skup svih snimki iste skladbe istog izvođača. Studijska, remaster i uživo verzije su ista pjesma. Obrada drugog izvođača i remiks su zasebne pjesme. Na MusicBrainzu to odgovara „djelu” (work) uz izvođača, ili grupiranju snimki po naslovu, izvođaču i ISRC-u. Pravilo treba provjeriti na uzorku.
+3. **Preklapanje se računa na više razina:** ista pjesma, isti album, isti izvođač, isti žanr. Dvije osobe koje vole različite pjesme Arctic Monkeysa ipak dijele ukus. To ulazi u metode sličnosti u Fazi 4 kao „preklapanje s IDF-om po razinama”.
+
+### Kako se opisuje pjesma
+
+| Sloj | Izvor | Pokrivenost |
+|---|---|---|
+| Izvođač: žanrovi, država, razdoblje | Discogs, MusicBrainz, Last.fm, Wikidata (kao za izvođače gore) | dobra |
+| Album ili singl: stilovi, godina | Discogs (stilovi izdanja), MusicBrainz (release group) | dobra za Discogs |
+| Pjesma: oznake | **Last.fm** (top tags pjesme) | vjerojatno dobra za popularne pjesme, slaba za nišne **[nije izmjereno, treba API ključ]** |
+| Pjesma: zvučna obilježja (tempo, energija, raspoloženje, akustičnost) | vidi dolje | otvoreno |
+| Pjesma: generirani opis i bodovi na osima | generirano iz gornjih slojeva | sve stavke, označeno |
+
+**Zvučna obilježja** bila bi najvrjedniji vlastiti signal pjesme, jer razlikuju laganu i energičnu pjesmu istog izvođača. Mogućnosti:
+- **Spotify audio features:** zatvoreno za nove aplikacije od 27. 11. 2024. ([Spotify](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api)). Otpada.
+- **AcousticBrainz:** otvoreni skup obilježja za oko 29 milijuna snimki, prikupljanje zaustavljeno 2022. ([AcousticBrainz download](https://acousticbrainz.org/download)). Je li još dostupan i koliko pokriva hrvatske pjesme, nije provjereno. Novije pjesme sigurno nema.
+- **Vlastita analiza zvuka** iz javnih isječaka od 30 sekundi (npr. Deezer). Pokriva sve pjesme, ali je veći posao, a uvjete korištenja isječaka treba provjeriti.
+- **Bez zvučnih obilježja:** energiju i raspoloženje procjenjuje generator iz oznaka i naziva. Najjednostavnije, ali najmanje pouzdano za nišne pjesme.
+
+To je otvoreno pitanje 13.
 
 ### Izvori i polja
 
 | Polje | Izvor | Licenca | Napomena |
 |---|---|---|---|
-| Identitet, nazivi, aliasi | Wikidata, MusicBrainz | CC0 | MusicBrainz ima više aliasa i pravopisnih varijanti |
+| Pjesma: identitet, naslov, trajanje, ISRC | MusicBrainz (snimka i djelo) | CC0 | Wikidata ima stavke samo za poznate pjesme, pa je za pjesme kanonski MusicBrainz |
+| Pjesma: album ili singl, godina izlaska | MusicBrainz, Discogs | CC0 | |
+| Pjesma: oznake | Last.fm (top tags pjesme) | nekomercijalno uz navod | |
+| Pjesma: poveznice za slušanje | Spotify, YouTube, Deezer ID | samo ID | Za playlistu. Preko MusicBrainz URL veza, ISRC-a ili pretrage. |
+| Izvođač: identitet, nazivi, aliasi | Wikidata, MusicBrainz | CC0 | MusicBrainz ima više aliasa i pravopisnih varijanti |
 | Vrsta (osoba ili sastav), država, godine aktivnosti | MusicBrainz, Wikidata | CC0 | Kod 2 od 22 izvođača iz uzorka država nije upisana na MusicBrainzu |
 | Žanrovi i stilovi | **Discogs dumpovi** (stilovi izdanja) | CC0 | Najbolja pokrivenost hrvatskih izvođača (18 od 18). Agregiraju se na razinu izvođača (vidi dolje). |
 | Žanrovi i oznake | **MusicBrainz** | CC BY-NC-SA | Vezani uz izvođača i manje šumni, ali ih ima samo 7 od 22 hrvatskih izvođača |
@@ -109,8 +153,8 @@ Za sličnost trebamo jedan zajednički rječnik u koji se preslikavaju svi izvor
 
 **Prijedlog:**
 - Osnovica su Discogs stilovi, jer su najpotpuniji za hrvatske stavke.
-- Uz njih ide preslikavanje Wikidatinih žanrova na Discogs stilove.
-- Dodaju se lokalni žanrovi koji u međunarodnim popisima ne postoje ili su skriveni pod „Folk, World, & Country”: klapa, tamburica, zabavna glazba, etno, turbofolk, starogradska, dalmatinska šansona i drugi. Popis treba složiti zajedno.
+- Uz njih ide preslikavanje Wikidatinih i MusicBrainz žanrova te Last.fm oznaka na Discogs stilove.
+- Lokalni žanrovi se ne dodaju (odluka iz drugog kruga). Ono što izvori imaju, na primjer Last.fm oznake poput „klapa”, ulazi preko preslikavanja.
 
 ## Film
 
@@ -122,7 +166,7 @@ Za sličnost trebamo jedan zajednički rječnik u koji se preslikavaju svi izvor
 | **Redatelj** | Jak signal autorskog ukusa („volim Lanthimosa”). | Rijeđi način razmišljanja kod većine ljudi. Miješa se s filmovima na istoj listi. |
 | **Serijal ili franšiza** (npr. Gospodar prstenova) | Ljudi tako i misle o tome. | Nejasno je je li to jedna stavka ili više njih. |
 
-**Prijedlog:** lista se sastoji samo od **filmova**. Redatelji i glumci ne mogu se birati, ali se koriste kao svojstva filma. Dokumentarni i animirani filmovi su dopušteni. Serije ostaju izvan opsega. To je otvoreno pitanje 2.
+**Odluka:** lista se sastoji od **filmova**. Redatelji, glumci i ostali podaci izvlače se iz filma kao metapodaci. Serije ostaju izvan opsega. Prijedlog za vrste filmova: dokumentarni i animirani su dopušteni, kratki nisu (otvoreno pitanje 2).
 
 ### Izvori i polja
 
@@ -170,6 +214,8 @@ Wikidata QID
  └─ IMDb, Spotify, Deezer ID → samo poveznice
 ```
 
+Za pjesme je čvorište MusicBrainz, a ne Wikidata, jer Wikidata ima stavke samo za poznate pjesme. Pjesma se veže na snimku i djelo na MusicBrainzu, a preko izvođača i albuma na Wikidatu i Discogs.
+
 Stavka bez Wikidata QID-a (novi izvođač, mali film) povezuje se preko MBID-a ili Discogs ID-a i dobiva vlastiti ID. Prema prvom mjerenju, MusicBrainz ima vezu na Wikidatu kod 16 od 22, a Wikidata ima Discogs ID kod 19 od 20 hrvatskih izvođača.
 
 ### Zapis stavke
@@ -178,7 +224,8 @@ Opis sadržaja, bez odluke o tehnologiji:
 
 | Grupa | Polja |
 |---|---|
-| Identitet | vlastiti ID, Wikidata QID, MBID, Discogs ID, domena, vrsta (izvođač, album, film) |
+| Identitet | vlastiti ID, Wikidata QID, MBID, Discogs ID, domena, vrsta (pjesma, film) |
+| Veze (pjesme) | izvođač, album ili singl, sve snimke koje čine istu pjesmu, poveznice za slušanje |
 | Nazivi | hrvatski, izvorni, engleski, aliasi, verzija bez dijakritika za pretragu |
 | Činjenice | godina ili razdoblje, država, jezik, ljudi (redatelj, članovi sastava) |
 | Žanrovi i obilježja | popis vrijednosti iz rječnika, svaka s težinom i izvorom |
@@ -193,11 +240,13 @@ Opis sadržaja, bez odluke o tehnologiji:
 Prvi krug istraživanja pokazao je da je pretraga veći problem od pokrivenosti. „Murina” je vratila rod šišmiša, „Kotlovina” jelo, „Zaa” tri različita izvođača, a „Severina” duplikat s četiri obožavatelja.
 
 Zahtjevi:
-1. **Filtriranje po domeni i vrsti.** U glazbi se traže samo izvođači (i albumi), a u filmu samo filmovi.
-2. **Bez dijakritika i s aliasima.** „sajeta” nalazi Šajetu, „kranksvester” Krankšvester, a „The High Sun” i „Zvizdan” isti film.
-3. **Rangiranje.** Prednost imaju popularnije stavke, da duplikati i prazne stavke padnu niže. Treba odlučiti dobivaju li hrvatske i regionalne stavke blagu prednost (otvoreno pitanje 5).
-4. **Razlikovni podaci u rezultatu.** Na primjer „Murina · film · 2021 · Antoneta Alamat Kusijanović” ili „Zaa · izvođač · Srbija · reggae, dub”.
-5. **Kad stavke nema.** Sudionik može upisati naziv ručno. Stavka se označi i kasnije ručno poveže ili opiše. Ovako se izbjegava da sudionik odustane ili izabere krivu stavku (otvoreno pitanje 4).
+1. **Filtriranje po domeni i vrsti.** U glazbi se traže pjesme, a u filmu filmovi.
+2. **Pretraga pjesme po naslovu i izvođaču.** Sudionik može upisati „cesarica”, „oliver cesarica” ili „cesarica dragojević”.
+3. **Jedna pjesma, jedan rezultat.** Sve snimke iste pjesme (remasteri, reizdanja, kompilacije) prikazuju se kao jedan rezultat. Uživo i akustične verzije ne prikazuju se zasebno, osim ako to odlučimo.
+4. **Bez dijakritika i s aliasima.** „sajeta” nalazi Šajetu, „kranksvester” Krankšvester, a „The High Sun” i „Zvizdan” isti film.
+5. **Rangiranje** po popularnosti, da duplikati i prazne stavke padnu niže. Hrvatske stavke nemaju prednost (odluka iz drugog kruga).
+6. **Razlikovni podaci u rezultatu.** Na primjer „Cesarica · Oliver Dragojević · 1993” ili „Murina · film · 2021 · Antoneta Alamat Kusijanović”.
+7. **Kad stavke nema.** Sudionik upiše naslov (i izvođača) ručno. Stavka se označi i prije analize ručno poveže ili opiše (odluka iz drugog kruga).
 
 Pretraga radi nad vlastitom kopijom kataloga, a ne uživo prema tuđim sučeljima. Razlozi su ograničenja broja upita (Wikidata je u ovom krugu vraćala HTTP 429 i 504), uvjeti korištenja i pravo baze podataka. Za pilot je dovoljan podskup kataloga (otvoreno pitanje 7).
 
@@ -221,10 +270,15 @@ Prvi uzorak naginjao je poznatim imenima. Za ovu provjeru predlažem uzorak bli�
 
 | Domena | Hrvatsko i regionalno | Strano | Ukupno |
 |---|---|---|---|
-| Glazba (izvođači) | 50, od toga barem 15 novijih ili nišnih (hip-hop, elektronika, izvođači nakon 2018.) | 50, uključujući nišne | 100 |
+| Glazba (pjesme) | 50, od toga barem 15 novijih ili nišnih (hip-hop, elektronika, pjesme nakon 2018.) | 50, uključujući nišne | 100 |
 | Film | 30, od toga barem 10 prije 1991. i 5 dokumentarnih | 30 | 60 |
 
-Najbolji izvor uzorka su stvarni favoriti. Ako 5–10 budućih sudionika unaprijed pošalje po 5 izvođača i 5 filmova, uzorak će odražavati njihov ukus, a ne naš (otvoreno pitanje 9).
+Najbolji izvor uzorka su stvarni favoriti. Ako 5–10 budućih sudionika unaprijed pošalje po 5 pjesama i 5 filmova, uzorak će odražavati njihov ukus, a ne naš (otvoreno pitanje 9).
+
+Za pjesme se dodatno mjeri:
+- jesu li sve snimke iste pjesme ispravno spojene u jednu
+- ima li pjesma Last.fm oznake
+- ima li pjesma poveznicu za slušanje (za playlistu)
 
 ### Što mjerimo
 
@@ -244,23 +298,24 @@ Pragovi su moj prijedlog i otvoreni su za raspravu.
 - Za svaku stavku ocjenjuju se opis (točno, djelomično, netočno), obilježja (koliko ih je pogrešno) i bodovi na osima (imaju li smisla)
 - Idealno ocjenjuju dvije osobe, od kojih bar jedna dobro poznaje hrvatsku scenu
 
-## Otvorena pitanja za prvi krug
+## Otvorena pitanja
 
-1. **Vrste stavki u glazbi:** samo izvođači; izvođači uz neobavezne albume; ili i pjesme? Prijedlog: izvođači, uz neobavezne albume.
-2. **Vrste stavki u filmu:** samo filmovi ili i redatelji? Ulaze li kratki filmovi i dokumentarci? Prijedlog: samo filmovi, uključujući dokumentarne i animirane, bez kratkih.
-3. ~~MusicBrainz žanrovi u pilotu~~ **Odlučeno:** koriste se, zajedno s Last.fm-om i TMDB-om (vidi „Odluke iz prvog kruga”).
-4. **Ručni unos:** smije li sudionik upisati stavku koje nema u katalogu? Prijedlog: smije. Takve stavke ručno povezujemo ili opisujemo prije analize.
-5. **Prednost domaćim stavkama u pretrazi:** treba li hrvatskim i regionalnim stavkama dati blagu prednost u rangiranju?
+Odlučeno: 1 (pjesme), 3 (MusicBrainz, Last.fm, TMDB), 4 (ručni unos zasad da), 5 (bez prednosti), 10 (bez lokalnih žanrova).
+
+2. **Vrste filmova:** ulaze li dokumentarni, animirani i kratki filmovi? Prijedlog: dokumentarni i animirani da, kratki ne.
 6. **Tekst Wikipedije:** smijemo li ga koristiti kao ulaz za generirane opise i vektore (CC BY-SA)? Ili samo za pilot, uz pravnu provjeru prije proizvoda?
 7. **Veličina kataloga za pilot:** cijeli Discogs i Wikidata (milijuni stavki) ili podskup? Na primjer svi izvođači i filmovi s Wikidata stavkom i barem minimalnom popularnošću, plus sve hrvatske i regionalne stavke.
 8. **Slike:** prikazuju li se omoti i plakati u pilotu (preko Wikidata ili Commons slika gdje postoje) ili je lista bez slika?
 9. **Uzorak za provjeru:** smijem li predložiti da 5–10 budućih sudionika unaprijed pošalje po nekoliko favorita?
-10. **Lokalni žanrovi:** koje hrvatske i regionalne žanrove i scene svakako dodati u glazbeni rječnik? Imaš li popis ili da ja složim prijedlog?
 11. **Generiranje za sve stavke:** slažeš li se da generiramo opise i obilježja za sve stavke, uz oznaku, a ne samo za one bez opisa?
+12. **Što znači „postaje playlista”?** a) Lista se može preslušati ili izvesti kao playlista (Spotify, YouTube), b) sudionik uvozi postojeću playlistu umjesto da pjesme traži jednu po jednu, ili oboje? Uvoz mijenja odluku „liste se slažu pretragom kataloga” i ovisi o tome što Spotify i YouTube još dopuštaju.
+13. **Zvučna obilježja pjesme:** AcousticBrainz (ako je dostupan, ali bez pjesama nakon 2022.), vlastita analiza 30-sekundnih isječaka ili bez zvučnih obilježja? Prijedlog: prvo izmjeriti AcousticBrainz, a vlastitu analizu zadržati kao varijantu za usporedbu u pilotu.
+14. **Duljina liste pjesama:** plan predviđa oko 10 stavki po domeni. Playlista je obično dulja, a pjesma nosi manje signala od izvođača. Prijedlog: 15–30 pjesama, s najmanje 10.
+15. **Uživo i akustične verzije:** jesu li ista pjesma kao studijska verzija? Prijedlog: jesu. Remiksi i obrade su zasebne pjesme.
 
 ## Što slijedi nakon pregleda
 
 Kad odgovoriš na pitanja, dopunit ću dokument odlukama. Zatim slijede:
 - rječnik žanrova i obilježja (prvi prijedlog za pregled)
 - popis uzorka za provjeru
-- mjerenja koja su ostala otvorena: podtipovi filmova, strani film za usporedbu, novi i digitalni izvođači na Discogsu, **Last.fm oznake i TMDB ključne riječi i hrvatski sažeci za hrvatske stavke** (oba trebaju API ključ)
+- mjerenja koja su ostala otvorena: podtipovi filmova, strani film za usporedbu, novi i digitalni izvođači na Discogsu, **Last.fm oznake pjesama i izvođača, TMDB ključne riječi i hrvatski sažeci za hrvatske stavke** (oba trebaju API ključ), dostupnost i pokrivenost AcousticBrainza
