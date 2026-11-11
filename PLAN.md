@@ -11,6 +11,8 @@ Točnost profila ključna je za cijeli projekt, a sve ostalo je zasad nebitno. I
 
 Cilj ovog plana: **pilot s 30 do 50 stvarnih ljudi** koji usporedi više metoda izračuna profila i sličnosti s onim kako ljudi doživljavaju sličnost, i pokaže koja metoda radi.
 
+**Opseg:** pilot pokriva samo **glazbu i filmove**. Ostale domene dodajemo tek kad pilot pokaže da pristup radi.
+
 Izvori:
 - `reports/Profil ukusa i sličnost korisnika.md`
 - `reports/Profil ukusa iz odabranih lista.md`
@@ -21,22 +23,22 @@ Izvori:
 | Tema | Odluka |
 |---|---|
 | Podaci | Jedna lista „definira me” po domeni. Bez povijesti, bez ostatka računa, bez upitnika u aplikaciji. |
-| Domene | Glazba, filmovi, serije, knjige, podcasti, video i društvene igre, hobiji, sport, hrana, umjetnost |
+| Domene | Za početak samo glazba i filmovi. Serije, knjige, podcasti, video i društvene igre, hobiji, sport, hrana i umjetnost dolaze kasnije, ako pilot uspije. |
 | Izvor stavki | Liste se slažu u alatu pretragom kataloga. Službeni API-ji samo gdje još rade. |
-| Katalozi | Trajno samo otvoreni izvori: Wikidata, MusicBrainz (CC0 jezgra), Discogs izvozi, TVmaze, Open Library izvozi, Podcast Index. Bez TMDB-a, BGG-a, IMDb-a i Last.fm-a za komercijalnu upotrebu. |
+| Katalozi | Trajno samo otvoreni izvori. Glazba: MusicBrainz (CC0 jezgra), Discogs izvozi, Wikidata. Film: Wikidata. Bez TMDB-a, IMDb-a i Last.fm-a za komercijalnu upotrebu. Ostali katalozi (TVmaze, Open Library, Podcast Index) uz kasnije domene. |
 | Praznine u metapodacima | Generirani opisi i žanrovi, označeni kao „generirano” |
 | Osi | Psihološke osi (Estetsko, Mračno, Zajedničarsko, Uzbudljivo, Cerebralno + energija, raspoloženje, dubina) + „kako konzumiraš” (nišnost, staro/novo, širina). Pilot ih provjerava. |
 | Sličnost | Unutar domena i preko domena. Domene se spajaju ponderirano po pouzdanosti (duljina i opisanost lista). |
 | Metode | Isprobati više metoda i usporediti ih (vidi dolje) |
 | Pilot | 30–50 poznanika. Liste slažu u jednostavnom alatu. Ocjenjuju anonimne liste 10–20 drugih. |
-| Za kasnije | Profil događaja i organizatora, demografija, osjetljivi sadržaj, oblik prikaza postotka, slobodan unos pojmova, os aktivnosti (testira se u pilotu) |
+| Za kasnije | Ostale domene i kontrolirani rječnik za nemedijske domene, profil događaja i organizatora, demografija, osjetljivi sadržaj, oblik prikaza postotka, slobodan unos pojmova, os aktivnosti (testira se u pilotu) |
 
 ## Faze
 
 ### Faza 1: Katalog i rječnik
-1. Za svaku domenu definirati izvor stavki i polja koja trebaju za profil: naziv, vrsta, godina, žanrovi/tagovi, opis, poveznice na Wikidatu.
-2. Za nemedijske domene složiti početni kontrolirani rječnik iz Wikidate (domena → kategorija → podkategorija → konkretna stavka) s hrvatskim nazivima i pretragom bez dijakritika. Za umjetnost Getty i Europeana, za sport OSM oznake.
-3. Pretraga mora filtrirati po domeni. Kratki nazivi poput Murina, Kotlovina i Zaa vraćali su krive pogotke.
+1. Za glazbu i film definirati izvor stavki i polja koja trebaju za profil: naziv, vrsta, godina, žanrovi/tagovi, opis, poveznice na Wikidatu. Glazba: izvođači i albumi iz MusicBrainza, uz Discogs i Wikidatu za žanrove i stilove. Film: Wikidata (žanr, redatelj, zemlja, godina, glumci).
+2. Pretraga s hrvatskim nazivima i bez dijakritika, filtrirana po domeni. Kratki nazivi poput Murina i Kotlovina vraćali su krive pogotke.
+3. Posebno provjeriti pokrivenost hrvatske glazbe i hrvatskog filma, jer su metapodaci tu najslabiji.
 4. **Obogaćivanje:** za stavke bez opisa i žanrova generirati opis, žanrove i bodove na osima. Svaka generirana vrijednost ima oznaku i izvor. Na uzorku od oko 50 stavki ručno provjeriti točnost generiranja.
 
 ### Faza 2: Alat za liste (samo za pilot)
@@ -75,7 +77,7 @@ Dodatne varijante za usporedbu:
 
 ### Faza 5: Vrednovanje
 - **Glavna metrika:** korelacija (Spearman) između izračunate i procijenjene sličnosti, po metodi i po domeni. Prag uspjeha je oko r ≥ 0,30. Uz to rangiranje: jesu li osobe koje je sudionik ocijenio najsličnijima i kod metode pri vrhu.
-- **Predviđanje skrivenih stavki:** sakrije se jedna domena (npr. knjige) i provjeri predviđaju li ostale domene koje su osobe po knjigama slične. To je test preko domena.
+- **Predviđanje preko domena:** provjeri se predviđa li sličnost po glazbi sličnost po filmu, i obrnuto. To je prvi test povezanosti ukusa preko domena.
 - **Provjera osi:** faktorska analiza bodova iz pilota. Potvrđuje li se struktura osi?
 - **Stabilnost:** korelacija profila i sličnosti između prvog i ponovljenog unosa.
 - **Pravednost:** točnost posebno za osobe s pretežno hrvatskim i pretežno stranim stavkama, te s generiranim opisima i bez njih.
@@ -85,10 +87,11 @@ Dodatne varijante za usporedbu:
 ### Faza 6: Zaključak pilota
 Izvještaj s rezultatima: koja metoda i koje težine pobjeđuju, koliko je postotak pouzdan, gdje profil griješi, koliko stavki treba. Na temelju toga:
 - odluke o prikazu postotka, demografiji i osjetljivom sadržaju
+- ako pristup radi: dodavanje ostalih domena, počevši od serija i knjiga
 - drugi krug pilota s 85 ili više sudionika, potreban za pouzdan zaključak
 - zatim profil događaja i organizatora
 
 ## Provjera da plan radi
-- **Faza 1:** svaka domena ima pretragu koja za uzorak hrvatskih i stranih stavki vraća točan pogodak. Generirani opisi prolaze ručnu provjeru na uzorku.
+- **Faza 1:** glazba i film imaju pretragu koja za uzorak hrvatskih i stranih stavki vraća točan pogodak. Generirani opisi prolaze ručnu provjeru na uzorku.
 - **Faza 2:** pilot sudionik može bez pomoći složiti liste i ocijeniti druge za manje od 20 minuta. Testirati na 2–3 osobe prije cijele skupine.
 - **Faze 3–5:** prije pravih podataka cijeli tijek provjeriti na nekoliko izmišljenih persona. To je samo tehnička provjera, ne dokaz točnosti, jer bi zaključak bio kružan. Zatim pokrenuti na podacima pilota i proizvesti tablicu metoda × metrika.
